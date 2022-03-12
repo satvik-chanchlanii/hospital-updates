@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<title>HR Application</title>
+<script>
+function validateForm(frm)
+{
+var firstInvalidComponent=null;
+var valid=true;
+var name=frm.name.value.trim();
+var nameErrorSection=document.getElementById('nameErrorSection');
+nameErrorSection.innerHTML='';
+if(name.length==0)
+{
+nameErrorSection.innerHTML='Name Required';
+valid=false;
+firstInvalidComponent=frm.name;
+}
+var hospitalCode=frm.hospitalCode.value;
+var hospitalCodeErrorSection=document.getElementById('hospitalCodeErrorSection');
+hospitalCodeErrorSection.innerHTML='';
+if(hospitalCode==-1)
+{
+hospitalCodeErrorSection.innerHTML='Select Hospital';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.hospitalCode;
+}
+
+var dateOfBooking=frm.dateOfBooking.value;
+var dateOfBookingErrorSection=document.getElementById('dateOfBookingErrorSection');
+dateOfBookingErrorSection.innerHTML='';
+if(dateOfBooking.length==0)
+{
+dateOfBookingErrorSection.innerHTML='Select Date Of Booking';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.dateOfBooking;
+}
+var genderErrorSection=document.getElementById('genderErrorSection');
+genderErrorSection.innerHTML='';
+if(frm.gender[0].checked==false && frm.gender[1].checked==false)
+{
+genderErrorSection.innerHTML='Select Gender';
+valid=false;
+}
+var registrationAmount=frm.registrationAmount.value.trim();
+var registrationAmountErrorSection=document.getElementById('registrationAmountErrorSection');
+registrationAmountErrorSection.innerHTML='';
+if(registrationAmount.length==0)
+{
+registrationAmountErrorSection.innerHTML='Registration Amount Required';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.registrationAmount;
+}
+else
+{
+var v='0123456789.';
+var e=0;
+var isRegistrationAmountValid=true;
+while(e<registrationAmount.length)
+{
+if(v.indexOf(registrationAmount.charAt(e))==-1)
+{
+registrationAmountErrorSection.innerHTML='Invalid Registration Amount';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.registrationAmount;
+isRegistrationAmountValid=false;
+break;
+}
+e++;
+}
+if(isRegistrationAmountValid)
+{
+var dot=registrationAmount.indexOf('.');
+if(dot!=-1)
+{
+var numberOfFractions=registrationAmount.length-(dot+1);
+if(numberOfFractions>2)
+{
+registrationAmountErrorSection.innerHTML='Invalid Basic Salary';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.registrationAmount;
+}
+}
+}
+}
+var disease=frm.disease.value.trim();
+var diseaseErrorSection=document.getElementById('diseaseErrorSection');
+diseaseErrorSection.innerHTML='';
+if(disease.length==0)
+{
+diseaseErrorSection.innerHTML='Disease Required';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.disease;
+}
+
+
+
+
+
+
+var aadharCardNumber=frm.aadharCardNumber.value.trim();
+var aadharNumberErrorSection=document.getElementById('aadharCardNumberErrorSection');
+aadharCardNumberErrorSection.innerHTML='';
+if(aadharCardNumber.length==0)
+{
+aadharCardNumberErrorSection.innerHTML='Aadhar Card Number Required';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.aadharCardNumber;
+}
+
+if(!valid) firstInvalidComponent.focus();
+return valid;
+}
+function cancelAddition()
+{
+document.getElementById('cancelAdditionForm').submit();
+}
+</script>
+</head>
+<body>
+<!-- Main Container starts here  -->
+<div style ='width:90hw;height:auto;border:1px solid black'>
+<!-- Header starts here  -->
+<div style ='margin:5px;width:90hw;height:auto;border:1px solid black'>
+<img src='/styleone/images/newicon.png' style='float:left'><div style='margin-top:9px;margin-bottom:9px;font-size:20pt'>Thinking Machines</div>
+</div> <!--Header ends here  -->
+<!-- Content Section starts here  -->
+<div style ='width:90hw;height:70vh;margin:5px;border:1px solid white'>
+<!-- Left Panel starts here  -->
+<div style ='height:65vh;margin:5px;float:left;padding:5px;border:1px solid black'>
+<a href='/styleone/hospitalsView'>Hospitals</a><br><br>
+<b>Patients</b><br><br>
+<a href='/styleone/index.html'>Home</a>
+</div>
+<!-- Left Panel ends here  -->
+<!-- Right Panel starts here  -->
+<div style ='height:65vh;margin-left:105px;margin-right:5px;margin-bottom:px;margin-top:5px;padding:5px;border:1px solid black'>
+<h1>Patient (Add Module)</h1>
+<form method='post' action='/styleone/addPatient' onsubmit='return validateForm(this)'>
+<table>
+<tr>
+<td>Name</td>
+<td><input type='text' id='name' name='name' maxlength='50' size='36'<br>
+<span id='nameErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Hospital</td>
+<td><select id='hospitalCode' name='hospitalCode'>
+<option value='-1'>&lt;Select Hospital&gt;</option>
+<option value='1'>DhiruBai Ambani Hospital</option>
+<option value='2'>Cooper Hospital</option>
+<option value='3'>Divya Hospital</option>
+<option value='4'>Index Hospital</option>
+</select>
+<span id='hospitalCodeErrorSection' style='color: red'></span>
+</td>
+</tr>
+<tr>
+<td>Date Of Booking</td>
+<td><input type='date' id='dateOfBooking' name='dateOfBooking'>
+<span id='dateOfBookingErrorSection' style='color: red'></span>
+</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td><input type='radio' id='male' value='M' name='gender'>Male
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type='radio' id='female' value='F' name='gender'>Female
+<span id='genderErrorSection' style='color: red'></span>
+</td>
+</tr>
+<tr>
+<td>Vaccinated ?</td>
+<td><input type='checkbox' id='isVaccinated' name='isVaccinated'>
+</td>
+</tr>
+<tr>
+<td>Registration Amount</td>
+<td><input type='text' id='registrationAmount' name='registrationAmount' maxlength='12' size='14'>
+<span id='registrationAmountErrorSection' style='color: red'></span>
+</td>
+</tr>
+<tr>
+<td>Disease</td>
+<td><input type='text' id='disease' name='disease' maxlength='35' size='36'<br>
+<span id='diseaseErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<tr>
+<td>Aadhar Card Number</td>
+<td><input type='text' id='aadharCardNumber' name='aadharCardNumber' maxlength='15' size='36'<br>
+<span id='aadharCardNumberErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<tr>
+<td colspan='2'><button type='submit'>Add</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<button type='button' onclick='cancelAddition()'>Cancel</button></td>
+</table>
+</form>
+</div>
+<!-- Right Panel ends here  -->
+</div> <!-- Content Section ends here  -->
+<!--footer starts here  -->
+<div style ='width:90hw;height:auto;margin:5px;text-align:center;border:1px solid white'>
+&copy; Thinking Machines 2021
+</div>
+</div>
+<form id='cancelAdditionForm' action='/styleone/hospitalsView'>
+</form>
+</body>
+</html>

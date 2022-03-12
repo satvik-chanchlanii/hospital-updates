@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<title>Hospital Updates At Your Hands</title>
+<script>
+function validateForm(frm)
+{
+var firstInvalidComponent=null;
+var valid=true;
+
+var hospitalName=frm.hospitalName.value.trim();
+var hospitalNameErrorSection=document.getElementById('hospitalNameErrorSection');
+hospitalNameErrorSection.innerHTML='';
+if(hospitalName.length==0)
+{
+hospitalNameErrorSection.innerHTML='Hospital Name Required';
+valid=false;
+firstInvalidComponent=frm.hospitalName;
+}
+
+var hospitalContact=frm.hospitalContact.value.trim();
+var hospitalContactErrorSection=document.getElementById('hospitalContactErrorSection');
+hospitalContactErrorSection.innerHTML='';
+if(hospitalContact.length==0)
+{
+hospitalContactErrorSection.innerHTML='Hospital Contact Required';
+valid=false;
+firstInvalidComponent=frm.hospitalContact;
+}
+if(hospitalContact.length!=10)
+{
+hospitalContactErrorSection.innerHTML='Contact should be of 10 digits only';
+valid=false;
+firstInvalidComponent=frm.hospitalContact;
+}
+
+
+var totalBeds=frm.totalBeds.value.trim();
+var totalBedsErrorSection=document.getElementById('totalBedsErrorSection');
+totalBedsErrorSection.innerHTML='';
+if(totalBeds.length==0)
+{
+totalBedsErrorSection.innerHTML='Total Beds Required';
+valid=false;
+firstInvalidComponent=frm.totalBeds;
+}
+
+var bedsAvailable=frm.bedsAvailable.value.trim();
+var bedsAvailableErrorSection=document.getElementById('bedsAvailableErrorSection');
+bedsAvailableErrorSection.innerHTML='';
+if(bedsAvailable.length==0)
+{
+bedsAvailableErrorSection.innerHTML='Beds Available Required';
+valid=false;
+firstInvalidComponent=frm.bedsAvailable;
+}
+if(bedsAvailable.length>totalBeds.length)
+{
+bedsAvailableErrorSection.innerHTML='Availability is more than total beds';
+valid=false;
+firstInvalidComponent=frm.bedsAvailable;
+}
+
+var totalVentilators=frm.totalVentilators.value.trim();
+var totalVentilatorsErrorSection=document.getElementById('totalVentilatorsErrorSection');
+totalVentilatorsErrorSection.innerHTML='';
+if(totalVentilators.length==0)
+{
+totalVentilatorsErrorSection.innerHTML='Total Ventilators Required';
+valid=false;
+firstInvalidComponent=frm.totalVentilators;
+}
+
+var ventilatorsAvailable=frm.ventilatorsAvailable.value.trim();
+var ventilatorsAvailableErrorSection=document.getElementById('ventilatorsAvailableErrorSection');
+ventilatorsAvailableErrorSection.innerHTML='';
+if(ventilatorsAvailable.length==0)
+{
+ventilatorsAvailableErrorSection.innerHTML='Ventilators Available Required';
+valid=false;
+firstInvalidComponent=frm.ventilatorsAvailable;
+}
+if(ventilatorsAvailable.length>totalVentilators.length)
+{
+ventilatorsAvailableErrorSection.innerHTML='Availability is more than total ventilators';
+valid=false;
+firstInvalidComponent=frm.ventilatorsAvailable;
+}
+
+var totalICU=frm.totalICU.value.trim();
+var totalICUErrorSection=document.getElementById('totalICUErrorSection');
+totalICUErrorSection.innerHTML='';
+if(totalICU.length==0)
+{
+totalICUErrorSection.innerHTML='Total ICU Required';
+valid=false;
+firstInvalidComponent=frm.totalICU;
+}
+
+var icuAvailable=frm.icuAvailable.value.trim();
+var icuAvailableErrorSection=document.getElementById('icuAvailableErrorSection');
+icuAvailableErrorSection.innerHTML='';
+if(icuAvailable.length==0)
+{
+icuAvailableErrorSection.innerHTML='ICU Available Required';
+valid=false;
+firstInvalidComponent=frm.icuAvailable;
+}
+if(icuAvailable.length>totalICU.length)
+{
+icuAvailableErrorSection.innerHTML='Availability is more than total ICUs';
+valid=false;
+firstInvalidComponent=frm.icuAvailable;
+}
+if(!valid) firstInvalidComponent.focus();
+return valid;
+}
+function cancelAddition()
+{
+document.getElementById('cancelAdditionForm').submit();
+}
+</script>
+</head>
+<body>
+<!-- Main Container starts here  -->
+<div style ='width:90hw;height:auto;border:1px solid black'>
+<!-- Header starts here  -->
+<div style ='margin:5px;width:90hw;height:auto;border:1px solid black'>
+<img src='/minor/images/newicon.png' style='float:left'><div style='margin-top:9px;margin-bottom:9px;font-size:20pt'>Thinking Machines</div>
+</div> <!--Header ends here  -->
+<!-- Content Section starts here  -->
+<div style ='width:90hw;height:70vh;margin:5px;border:1px solid white'>
+<!-- Left Panel starts here  -->
+<div style ='height:65vh;margin:5px;float:left;padding:5px;border:1px solid black'>
+<b>Hosiptals</b><br><br>
+<a href='/minor/patientsView'>Patients</a><br><br>
+<a href='/minor/vaccinesView'>Book Vaccine</a><br><br>
+<a href='/minor/contactUs'>Contact Us</a><br><br>
+<a href='/minor/aboutUs'>AboutUs</a><br><br>
+<a href='/minor/index.html'>Home</a><br><br>
+</div>
+<!-- Left Panel ends here  -->
+<!-- Right Panel starts here  -->
+<div style ='height:65vh;margin-left:105px;margin-right:5px;margin-bottom:px;margin-top:5px;padding:5px;border:1px solid black'>
+<h1>Hospital (Add Module)</h1>
+<form method='post' action='/minor/addHospital' onsubmit='return validateForm(this)'>
+<table>
+<tr>
+<td>Hospital Name</td>
+<td><input type='text' id='hospitalName' name='hospitalName' maxlength='100' size='36'<br>
+<span id='hospitalNameErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Total Beds</td>
+<td><input type='number' id='totalBeds' name='totalBeds' maxLength='2' size='36'<br>
+<span id='totalBedsErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Beds Available</td>
+<td><input type='number' id='bedsAvailable' name='bedsAvailable' maxLength='2' size='36'<br>
+<span id='bedsAvailableErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Total Ventilators</td>
+<td><input type='number' id='totalVentilators' name='totalVentilators' maxLength='2' size='36'<br>
+<span id='totalVentilatorsErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Ventilators Available</td>
+<td><input type='number' id='ventilatorsAvailable' name='ventilatorsAvailable' maxLength='2' size='36'<br>
+<span id='ventilatorsAvailableErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Total ICUs</td>
+<td><input type='number' id='totalICU' name='totalICU' maxLength='2' size='36'<br>
+<span id='totalICUErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>ICUs Available</td>
+<td><input type='number' id='icuAvailable' name='icuAvailable' maxLength='2' size='36'<br>
+<span id='icuAvailableErrorSection' style='color: red'></span></td>
+</tr>
+<tr>
+<td>Hospital Contact</td>
+<td><input type='text' id='hospitalContact' name='hospitalContact' maxlength='10' size='36'<br>
+<span id='hospitalContactErrorSection' style='color: red'></span></td>
+</tr>
+<td colspan='2'><button type='submit'>Add</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<button type='button' onclick='cancelAddition()'>Cancel</button></td>
+</table>
+</form>
+</div>
+<!-- Right Panel ends here  -->
+</div> <!-- Content Section ends here  -->
+<!--footer starts here  -->
+<div style ='width:90hw;height:auto;margin:5px;text-align:center;border:1px solid white'>
+&copy; Thinking Machines 2021
+</div>
+</div>
+<form id='cancelAdditionForm' action='/minor/hospitalsView'>
+</form>
+</body>
+</html>

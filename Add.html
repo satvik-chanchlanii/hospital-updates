@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Hospital</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+    <script>
+        function validateForm(frm) {
+            var firstInvalidComponent = null;
+            var valid = true;
+
+            var hospitalName = frm.hospitalName.value.trim();
+            var hospitalNameErrorSection = document.getElementById('hospitalNameErrorSection');
+            hospitalNameErrorSection.innerHTML = '';
+            if (hospitalName.length == 0) {
+                hospitalNameErrorSection.innerHTML = 'Hospital Name Required';
+                valid = false;
+                firstInvalidComponent = frm.hospitalName;
+            }
+
+            var hospitalContact = frm.hospitalContact.value.trim();
+            var hospitalContactErrorSection = document.getElementById('hospitalContactErrorSection');
+            hospitalContactErrorSection.innerHTML = '';
+            if (hospitalContact.length == 0) {
+                hospitalContactErrorSection.innerHTML = 'Hospital Contact Required';
+                valid = false;
+                firstInvalidComponent = frm.hospitalContact;
+            }
+            if (hospitalContact.length != 10) {
+                hospitalContactErrorSection.innerHTML = 'Contact should be of 10 digits only';
+                valid = false;
+                firstInvalidComponent = frm.hospitalContact;
+            }
+
+
+            var totalBeds = frm.totalBeds.value.trim();
+            var totalBedsErrorSection = document.getElementById('totalBedsErrorSection');
+            totalBedsErrorSection.innerHTML = '';
+            if (totalBeds.length == 0) {
+                totalBedsErrorSection.innerHTML = 'Total Beds Required';
+                valid = false;
+                firstInvalidComponent = frm.totalBeds;
+            }
+
+            var bedsAvailable = frm.bedsAvailable.value.trim();
+            var bedsAvailableErrorSection = document.getElementById('bedsAvailableErrorSection');
+            bedsAvailableErrorSection.innerHTML = '';
+            if (bedsAvailable.length == 0) 
+		{
+                bedsAvailableErrorSection.innerHTML = 'Beds Available Required';
+                valid = false;
+                firstInvalidComponent = frm.bedsAvailable;
+            }
+            bedsAvailableErrorSection.innerHTML = '';
+
+            if (bedsAvailable.length > totalBeds.length) 
+		{
+                bedsAvailableErrorSection.innerHTML = 'Availability is more than total beds';
+                valid = false;
+                firstInvalidComponent = frm.bedsAvailable;
+            }
+
+            var totalVentilators = frm.totalVentilators.value.trim();
+            var totalVentilatorsErrorSection = document.getElementById('totalVentilatorsErrorSection');
+            totalVentilatorsErrorSection.innerHTML = '';
+            if (totalVentilators.length == 0) {
+                totalVentilatorsErrorSection.innerHTML = 'Total Ventilators Required';
+                valid = false;
+                firstInvalidComponent = frm.totalVentilators;
+            }
+
+            var ventilatorsAvailable = frm.ventilatorsAvailable.value.trim();
+            var ventilatorsAvailableErrorSection = document.getElementById('ventilatorsAvailableErrorSection');
+            ventilatorsAvailableErrorSection.innerHTML = '';
+            if (ventilatorsAvailable.length == 0) {
+                ventilatorsAvailableErrorSection.innerHTML = 'Ventilators Available Required';
+                valid = false;
+                firstInvalidComponent = frm.ventilatorsAvailable;
+            }
+            if (ventilatorsAvailable.length > totalVentilators.length) {
+                ventilatorsAvailableErrorSection.innerHTML = 'Availability is more than total ventilators';
+                valid = false;
+                firstInvalidComponent = frm.ventilatorsAvailable;
+            }
+var totalICU = frm.totalICU.value.trim();
+            var totalICUErrorSection = document.getElementById('totalICUErrorSection');
+            totalICUErrorSection.innerHTML = '';
+            if (totalICU.length == 0) {
+                totalICUErrorSection.innerHTML = 'Total ICU Required';
+                valid = false;
+                firstInvalidComponent = frm.totalICU;
+            }
+            5
+            var icuAvailable = frm.icuAvailable.value.trim();
+            var icuAvailableErrorSection = document.getElementById('icuAvailableErrorSection');
+            icuAvailableErrorSection.innerHTML = '';
+            if (icuAvailable.length == 0) {
+                icuAvailableErrorSection.innerHTML = 'ICU Available Required';
+                valid = false;
+                firstInvalidComponent = frm.icuAvailable;
+            }
+            if (icuAvailable.length > totalICU.length) {
+                icuAvailableErrorSection.innerHTML = 'Availability is more than total ICUs';
+                valid = false;
+                firstInvalidComponent = frm.icuAvailable;
+            }
+            if (!valid) firstInvalidComponent.focus();
+            return valid;
+        }
+
+        function cancelAddition() {
+            document.getElementById('cancelAdditionForm').submit();
+        }
+    </script>
+    <style>
+        .upper {
+            margin-top: -35px;
+            margin-left: 15vh;
+            font-size: 25px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        
+        .ujjain {
+            color: rgb(134, 134, 131);
+            font-size: 25px;
+            margin-left: 130px;
+            margin-top: -40px;
+            font-family: 'Times New Roman', Times, serif;
+            position: -webkit-sticky;
+            position: sticky;
+            overflow: hidden;
+            font-size: 25px;
+        }
+        
+        .header {
+            height: 45px;
+            width: 45px;
+            margin-top: 50px;
+            margin-left: 90px;
+            position: -webkit-sticky;
+            position: sticky;
+            overflow: hidden;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin-left: 70vh;
+            padding: 0;
+            overflow: hidden;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+        }
+        
+        li {
+            float: left;
+        }
+        
+        li a {
+            font-size: 19px;
+            background-color: rgb(112, 190, 201);
+            display: block;
+            color: rgb(7, 7, 7);
+            ;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        li a:hover {
+            background-color: rgb(70, 155, 141);
+        }
+        
+        .mail:hover {
+            color: lawngreen;
+        }
+        
+        .background {
+            background-color: #000000;
+        }
+        
+        .form {
+            color: rgba(10, 7, 7, 0.953);
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+
+        <img src='images/logo.png' style='height: 30x; width: 30px; margin-left:80px ; position: static;'>
+        <u><p class='upper'>ospital Update At Your Hands</p></u>
+    </div>
+    <hr style='margin-top: -10px;'>
+    <div style='margin-top: -30px;'>
+<img src='images/A-logo.png ' class='header '>
+        <u><b><i> <p class='ujjain' style='background-color: rgba(15, 15, 15, 0.986); width: 160px;'>ll About Ujjain</p></i></b></u>
+    </div>
+    <img src='images/about-bg.jpg' height='696px' width='1530px' style='margin-top: -65px; margin-left: -10px;'>
+    <div style='margin-top: -710px; ; '>
+
+        <i><b><ul>
+
+
+    <li><a href='/minor/index.html#top' class='smoothScroll'>Home</a></li>
+                    <li><a href='/minor/index.html#about' class='smoothScroll'>About Us</a></li>
+                    <li>
+                        <a href='/minor/hospitalsView' class='smoothScroll'>Hospitals</a>
+                    </li>
+                    <li>
+                        <a href='/minor/PatientLogin.html' class='smoothscroll'>Patients</a>
+                    </li>
+                    <li><a href='/minor/index.html#contactUs' class='smoothScroll'>Contact Us</a></li>
+                    <li>
+                        <a href='https://selfregistration.cowin.gov.in/'>Book Vaccine</a>
+                    </li>
+
+            <li><a href='/minor/index.html#enquiry '>Make an Enquiry</a></li>
+
+        </ul></b></i>
+    </div>
+    <div style='height:65vh; margin-left:105px; margin-right:5px; margin-bottom:px; margin-top:85px; padding:5px; border:1px solid black'>
+        <h1>Hospital (Add Module)</h1>
+        <form method='post' action='/minor/addHospital' onsubmit='return validateForm(this)'>
+            <table>
+                <tr>
+                    <td>Hospital Name</td>
+                    <td><input type='text' id='hospitalName' name='hospitalName' maxlength='100' size='36'><br>
+                        <span id='hospitalNameErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Total Beds</td>
+                    <td><input type='number' id='totalBeds' name='totalBeds' maxLength='2' size='36'><br>
+                        <span id='totalBedsErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Beds Available</td>
+                    <td><input type='number' id='bedsAvailable' name='bedsAvailable' maxLength='2' size='36'><br>
+                        <span id='bedsAvailableErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Total Ventilators</td>
+                    <td><input type='number' id='totalVentilators' name='totalVentilators' maxLength='2' size='36'><br>
+                        <span id='totalVentilatorsErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Ventilators Available</td>
+                    <td><input type='number' id='ventilatorsAvailable' name='ventilatorsAvailable' maxLength='2' size='36'> <br>
+                        <span id='ventilatorsAvailableErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Total ICUs</td>
+                    <td><input type='number' id='totalICU' name='totalICU' maxLength='2' size='36'><br>
+                        <span id='totalICUErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>ICUs Available</td>
+                    <td><input type='number' id='icuAvailable' name='icuAvailable' maxLength='2' size='36'><br>
+                        <span id='icuAvailableErrorSection' style='color: red'></span></td>
+                </tr>
+                <tr>
+                    <td>Hospital Contact</td>
+                    <td><input type='text' id='hospitalContact' name='hospitalContact' maxlength='10' size='36'><br>
+                        <span id='hospitalContactErrorSection' style='color: red'></span></td>
+                </tr>
+                <td colspan='2'><button type='submit' style='padding:5px;margin-top: 20px;margin-left: 60px; background-color: lawngreen;'>Add</button> &nbsp;&nbsp;&nbsp;&nbsp;
+<button type='button' onclick='cancelAddition()' style='padding: 5px;background-color: lawngreen;'>Cancel</button></td>
+            </table>
+        </form>
+    </div>
+<form id='cancelAdditionForm' action='/minor/adminHospitalsView'>
+</form>
+</body>
+
+</html>

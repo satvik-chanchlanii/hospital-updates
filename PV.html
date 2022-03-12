@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patient View</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+    <script>
+        function Patient() {
+            this.patientId = '';
+            this.name = '';
+            this.hospitalCode = 0;
+            this.dateOfBooking = '';
+            this.gender = '';
+            this.isVaccinated = '';
+            this.registrationAmount = '';
+            this.disease = '';
+            this.aadharCardNumber = '';
+        }
+        var selectedRow = null;
+        var patients = [];
+        var patient = new Patient();
+        patient.patientId = "A100001";
+        patient.name = "Ramesh Sharma";
+        patient.hospitalCode = 5;
+        patient.gender = 'Male';
+        patient.isVaccinated = true;
+        patient.dateOfBooking = '10/12/1996';
+        patient.registrationAmount = 900000;
+        patient.disease = 'Heart';
+        patient.aadharCardNumber = 'AADHAR2313';
+        patients[0] = patient;
+
+
+        function selectPatient(row, patientId) {
+            if (selectedRow == row) return;
+            if (selectedRow != null) {
+                selectedRow.style.background = 'white';
+                selectedRow.style.color = 'black';
+            }
+            row.style.background = '#7C7B7B';
+            row.style.color = 'white';
+            selectedRow = row;
+            var i;
+            for (i = 0; i < patients.length; i++) {
+                if (patients[i].patientId == patientId) {
+                    break;
+                }
+            }
+            var emp = patients[i];
+            document.getElementById('detailPanel_patientId').innerHTML = emp.patientId;
+            document.getElementById('detailPanel_name').innerHTML = emp.name;
+            document.getElementById('detailPanel_gender').innerHTML = emp.gender;
+            if (emp.isVaccinated) {
+                document.getElementById('detailPanel_isVaccinated').innerHTML = 'Yes';
+            } else {
+                document.getElementById('detailPanel_isVaccinated').innerHTML = 'No';
+            }
+            document.getElementById('detailPanel_dateOfBooking').innerHTML = emp.dateOfBooking;
+            document.getElementById('detailPanel_registrationAmount').innerHTML = emp.registrationAmount;
+            document.getElementById('detailPanel_disease').innerHTML = emp.disease;
+            document.getElementById('detailPanel_aadharCardNumber').innerHTML = emp.aadharCardNumber;
+        }
+    </script>
+    <style>
+        .upper {
+            color: white;
+            margin-top: -35px;
+            margin-left: 15vh;
+            font-size: 25px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        .ujjain {
+            color: rgb(134, 134, 131);
+            font-size: 25px;
+            margin-left: 130px;
+            margin-top: -40px;
+            font-family: 'Times New Roman', Times, serif;
+            position: -webkit-sticky;
+            position: sticky;
+            overflow: hidden;
+            font-size: 25px;
+        }
+        
+        .header {
+            height: 45px;
+            width: 45px;
+            margin-top: 50px;
+            margin-left: 90px;
+            position: -webkit-sticky;
+            position: sticky;
+            overflow: hidden;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin-left: 70vh;
+            padding: 0;
+            overflow: hidden;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+        }
+        
+        li {
+            float: left;
+        }
+        
+        li a {
+            font-size: 19px;
+            background-color: #19dddd;
+            display: block;
+            color: hsl(0, 0%, 4%);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+li a:hover {
+            background-color: white;
+        }
+        
+        .mail:hover {
+            color: lawngreen;
+        }
+        
+        .table {
+            border: 1px;
+            padding: 20px;
+            position: sticky;
+            border: solid yellow;
+            background-color: rgb(31, 152, 161);
+            opacity: 0.8;
+        }
+        
+        .table2 {
+            border: 1px;
+            padding: 20px;
+            position: sticky;
+            border: solid yellow;
+            background-color: rgb(13, 13, 14);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body style='background-color: #050505;'>
+    <div>
+
+        <img src='images/logo.png ' style='height: 30x; width: 30px; margin-left:80px ; position: static; '>
+        <u><p class='upper '>ospital Update At Your Hands</p></u>
+    </div>
+    <hr style='margin-top: -10px; '>
+    <div style='text-align: right;margin-top: -45px '>
+        <span class='phone-icon ' style='padding-right: 20px; color: white;'><i class='fa fa-phone ' style='color: lawngreen; '></i> 9174057563</span>
+
+        <span class='date-icon ' style='padding-right: 20px; color: white;'><i class='fa fa-calendar-plus-o '  style='color: lawngreen; '></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
+        <span class='email-icon ' style='padding-right: 20px; color: white;'><i class='fa fa-envelope-o '  style='color: lawngreen; '></i> <a href='# ' class='mail ' style='text-decoration: none;color: white; '  >rajeevanjana143@gmail.com</a></span>
+    </div>
+    <div style='margin-top: -30px; '>
+
+        <img src='images/A-logo.png ' class='header '>
+        <u><b><i> <p class='ujjain ' style='background-color: rgba(15, 15, 15, 0.986); width: 160px; '>ll About Ujjain</p></i></b></u>
+    </div>
+    <img src='images/login.jpg' style='height: 632px; width:1550px ;  '>
+    <div style='margin-top: -710px; '>
+
+        <i><b><ul>
+
+    <li><a href='/minor/index.html#top' class='smoothScroll'>Home</a></li>
+                    <li><a href='/minor/index.html#about' class='smoothScroll'>About Us</a></li>
+                    <li>
+                        <a href='/minor/hospitalsView' class='smoothScroll'>Hospitals</a>
+                    </li>
+                    <li>
+                        <a href='/minor/PatientLogin.html' class='smoothscroll'>Patients</a>
+                    </li>
+                    <li><a href='/minor/index.html#contactUs' class='smoothScroll'>Contact Us</a></li>
+                    <li>
+                        <a href='https://selfregistration.cowin.gov.in/'>Book Vaccine</a>
+                    </li>
+
+            <li><a href='/minor/index.html#enquiry '>Make an Enquiry</a></li>
+
+    </ul></b></i>
+    </div>
+
+    <div>
+        <lable style='background:gray;color: white;font-size: 50px; '>Patient</lable>
+
+        <table class='table'>
+            <thead>
+                <tr style='font-size: 25px;'>
+                    <th style=' margin-left: 10px; color: red; '>S.No</th>
+                    <th style='padding-left: 35px;color: red; '>Patient ID</th>
+                    <th style='padding-left: 20px;color: red; '>Name</th>
+                    <th style='padding-left: 20px;color: red; '>Delete</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr style='cursor:pointer' onclick='selectPatient(this,'A100001')'>
+                    <td style='text-align:left'>1.</td>
+                    <td style='padding-left: 35px;'>A100001</td>
+                    <td style='padding-left: 20px;'>Ramesh Sharma</td>
+                    <td style='text-align:center;padding-left: 20px;'><a href='/minor/confirmDeletePatient?patientId=A100001'>Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+    <div style='height:20vh; margin-left:5px; margin-right:5px; margin-bottom:px; margin-top:5px; padding:5px; border:1px solid black;padding-top: 90px;'>
+        <label style='background:gray;color:white;padding-left:5px;padding-right:5px;font-size: 50px ;'>Details</label>
+        <table class='table2' border='0' width='100%'>
+            <tr>
+                <td style='padding-top: 10px;font-size: 22px;color: lawngreen;'>Patient Id :<span id='detailPanel_patientId' style='margin-right:100px;'></span></td>
+                <td style='font-size: 22px;color: lawngreen;'>Name :<span id='detailPanel_name' style='margin-right:100px'></span></td>
+            </tr>
+            <tr>
+                <td style='padding-top: 25px;font-size: 22px;color: lawngreen;'>Date Of Booking :<span id='detailPanel_dateOfBooking' style='margin-right:100px'></span></td>
+                <td style='font-size: 22px;color: lawngreen;'> Gender :<span id='detailPanel_gender' style='margin-right:100px'></span></td>
+
+
+                <td style='font-size: 22px;color: lawngreen;'>Is Vaccinated :<span id='detailPanel_isVaccinated' style='margin-right:100px'></span></td>
+            </tr>
+            <tr>
+                <td style='padding-top: 25px;font-size: 22px;color: lawngreen;'>Registration Amount :<span id='detailPanel_registrationAmount' style='margin-right:100px'></span></td>
+                <td style='font-size: 22px;color: lawngreen;'>Disease :<span id='detailPanel_disease' style='margin-right:100px'></span></td>
+                <td style='font-size: 22px;color: lawngreen;'>Aadhar Card Number :<span id='detailPanel_aadharCardNumber' style='margin-right:100px'></span></td>
+            </tr>
+
+    </div>
+</body>
+
+</html>

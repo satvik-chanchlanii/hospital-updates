@@ -1,0 +1,207 @@
+package com.project.hr.servlets;
+import com.project.hr.dl.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+public class PatientsView extends HttpServlet
+{
+public void doGet(HttpServletRequest request,HttpServletResponse response)
+{
+try
+{
+int hospitalCode=0;
+try
+{
+hospitalCode=Integer.parseInt(request.getParameter("hospitalNumber"));
+}catch(NumberFormatException nfe)
+{
+sendBackView(response);
+return;
+}
+HospitalDTO hospital=new HospitalDTO();
+PatientDAO patientDAO=new PatientDAO();
+PatientDTO patientDTO=new PatientDTO();
+Set<PatientDTO> patients;
+patients=patientDAO.getByHospitalCode(hospitalCode);
+PrintWriter pw=response.getWriter();
+response.setContentType("text/html");
+
+
+
+
+
+pw.println("<!DOCTYPE HTML>");
+pw.println("<html lang='en'>");
+pw.println("<head>");
+pw.println("<title>HR Application</title>");
+pw.println("<script>");
+pw.println("function Patient()");
+pw.println("{");
+pw.println("this.patientId=\"\";");
+pw.println("this.name=\"\";");
+pw.println("this.hospitalCode=0;");
+pw.println("this.dateOfBooking=\"\";");
+pw.println("this.gender=\"\";");
+pw.println("this.isVaccinated=\"\";");
+pw.println("this.registrationAmount=\"\";");
+pw.println("this.disease=\"\";");
+pw.println("this.aadharCardNumber=\"\";");
+pw.println("}");
+pw.println("var selectedRow=null;");
+pw.println("var patients=[];");
+int i=0;
+SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+for(PatientDTO patient:patients)
+{
+pw.println("var patient=new Patient();");
+pw.println("patient.patientId=\""+patient.getPatientId()+"\";");
+pw.println("patient.name=\""+patient.getName()+"\";");
+pw.println("patient.hospitalCode=\""+patient.getHospitalCode()+"\";");
+pw.println("patient.gender=\""+patient.getGender()+"\";");
+pw.println("patient.isVaccinated="+patient.getIsVaccinated()+";");
+pw.println("patient.dateOfBooking=\""+sdf.format(patient.getDateOfBooking())+"\";");
+pw.println("patient.registrationAmount="+patient.getRegistrationAmount().toPlainString()+";");
+pw.println("patient.disease=\""+patient.getDisease()+"\";");
+pw.println("patient.aadharCardNumber=\""+patient.getAadharCardNumber()+"\";");
+pw.println("patients["+i+"]=patient;");
+i++;
+}
+pw.println("");
+pw.println("");
+pw.println("function selectPatient(row,patientId)");
+pw.println("{");
+pw.println("if(selectedRow==row) return;");
+pw.println("if(selectedRow!=null)");
+pw.println("{");
+pw.println("selectedRow.style.background= \"white\";");
+pw.println("selectedRow.style.color=\"black\";");
+pw.println("}");
+pw.println("row.style.background= \"#7C7B7B\";");
+pw.println("row.style.color=\"white\";");
+pw.println("selectedRow=row;");
+pw.println("var i;");
+pw.println("for(i=0;i<patients.length;i++)");
+pw.println("{");
+pw.println("if(patients[i].patientId==patientId)");
+pw.println("{");
+pw.println("break;");
+pw.println("}");
+pw.println("}");
+pw.println("var emp=patients[i];");
+pw.println("document.getElementById(\"detailPanel_patientId\").innerHTML=emp.patientId;");
+pw.println("document.getElementById(\"detailPanel_name\").innerHTML=emp.name;");
+pw.println("document.getElementById(\"detailPanel_gender\").innerHTML=emp.gender;");
+pw.println("if(emp.isVaccinated)");
+pw.println("{");
+pw.println("document.getElementById(\"detailPanel_isVaccinated\").innerHTML=\"Yes\";");
+pw.println("}");
+pw.println("else");
+pw.println("{");
+pw.println("document.getElementById(\"detailPanel_isVaccinated\").innerHTML=\"No\";");
+pw.println("}");
+pw.println("document.getElementById(\"detailPanel_dateOfBooking\").innerHTML=emp.dateOfBooking;");
+pw.println("document.getElementById(\"detailPanel_registrationAmount\").innerHTML=emp.registrationAmount;");
+pw.println("document.getElementById(\"detailPanel_disease\").innerHTML=emp.disease;");
+pw.println("document.getElementById(\"detailPanel_aadharCardNumber\").innerHTML=emp.aadharCardNumber;");
+pw.println("}");
+pw.println("</script>");
+pw.println("</head>");
+pw.println("<body>");
+pw.println("<!-- Main Container starts here  -->");
+pw.println("<div style ='width:90hw;height:auto;border:1px solid black'>");
+pw.println("<!-- Header starts here  -->");
+pw.println("<div style ='margin:5px;width:90hw;height:auto;border:1px solid black'>");
+pw.println("<a href='/minor/index.html'><img src='/minor/images/newicon.png' style='float:left'></a><div style='margin-top:9px;margin-bottom:9px;font-size:20pt'>Thinking Machines</div>");
+pw.println("</div> <!--Header ends here  -->");
+pw.println("<!-- Content Section starts here  -->");
+pw.println("<div style ='width:90hw;height:70vh;margin:5px;border:1px solid white'>");
+pw.println("<!-- Left Panel starts here  -->");
+pw.println("<div style ='height:65vh;margin:5px;float:left;padding:5px;border:1px solid black'>");
+pw.println("<a href='/minor/hospitalsView'>Hospitals</a><br><br>");
+pw.println("<b>Patients</b><br><br>");
+pw.println("<a href='/minor/index.html'>Home</a>");
+pw.println("</div>");
+pw.println("<!-- Left Panel ends here  -->");
+pw.println("<!-- Right Panel starts here  -->");
+pw.println("<div style ='height:65vh;margin-left:105px;margin-right:5px;margin-bottom:px;margin-top:5px;padding:5px;border:1px solid black'>");
+pw.println("<h4>Patients</h4>");
+pw.println("<div style ='height:30vh;margin-left:5px;margin-right:5px;margin-bottom:px;margin-top:5px;padding:5px;border:1px solid black;overflow:scroll'>");
+pw.println("<table border='1'>");
+pw.println("<thead>");
+pw.println("<tr>");
+pw.println("<th colspan='4' style='text-align:right;padding:5px'>");
+pw.println("</th>");
+pw.println("</tr>");
+pw.println("<tr>");
+pw.println("<th style='width:60px;text-align:center'>S.No.</th>");
+pw.println("<th style='width:200px;text-align:center'>Id.</th>");
+pw.println("<th style='width:200px;text-align:center'>Name</th>");
+pw.println("<th style='width:100px;text-align:center'>Delete</th>");
+pw.println("</tr>");
+pw.println("</thead>");
+pw.println("<tbody>");
+int sno=0;
+for(PatientDTO patient:patients)
+{
+sno++;
+pw.println("<tr style='cursor:pointer' onclick='selectPatient(this,\""+patient.getPatientId()+"\")'>");
+pw.println("<td style='text-align:right'>"+sno+".</td>");
+pw.println("<td>"+patient.getPatientId()+"</td>");
+pw.println("<td>"+patient.getName()+"</td>");
+pw.println("<td style='text-align:center'><a href='/minor/confirmDeletePatient?patientId="+patient.getPatientId()+"'>Delete</a></td>");
+pw.println("</tr>");
+pw.println("</tr>");
+}
+pw.println("</tbody>");
+pw.println("</table>");
+pw.println("</div>");
+pw.println("<div style ='height:20vh;margin-left:5px;margin-right:5px;margin-bottom:px;margin-top:5px;padding:5px;border:1px solid black'>");
+pw.println("<label style='background:gray;color:white;padding-left:5px;padding-right:5px'>Details</label>");
+pw.println("<table border='0' width=\"100%\">");
+pw.println("<tr>");
+pw.println("<td>Patient Id :<span id='detailPanel_patientId' style='margin-right:100px'></span></td>");
+pw.println("<td>Name :<span id='detailPanel_name' style='margin-right:100px'></span></td>");
+pw.println("<td>Date Of Booking :<span id='detailPanel_dateOfBooking' style='margin-right:100px'></span></td>");
+pw.println("</tr>");
+pw.println("<tr>");
+pw.println("<td>Gender :<span id='detailPanel_gender' style='margin-right:100px'></span></td>");
+pw.println("<td>Is Vaccinated :<span id='detailPanel_isVaccinated' style='margin-right:100px'></span></td>");
+pw.println("<td>Registration Amount :<span id='detailPanel_registrationAmount' style='margin-right:100px'></span></td>");
+pw.println("</tr>");
+pw.println("<tr>");
+pw.println("<td>Disease :<span id='detailPanel_disease' style='margin-right:100px'></span></td>");
+pw.println("<td>Aadhar Card Number :<span id='detailPanel_aadharCardNumber' style='margin-right:100px'></span></td>");
+pw.println("</tr>");
+pw.println("");
+pw.println("</div>");
+pw.println("");
+pw.println("");
+pw.println("</div>");
+pw.println("<!-- Right Panel ends here  -->");
+pw.println("</div> <!-- Content Section ends here  -->");
+pw.println("<!--footer starts here  -->");
+pw.println("<div style ='width:90hw;height:auto;text-align:center;border:1px solid white'>");
+pw.println("&copy; Thinking Machines 2021");
+pw.println("</div>");
+pw.println("</div>");
+pw.println("</body>");
+pw.println("</html>");
+}catch(IOException ioException)
+{
+System.out.println(ioException.getMessage());
+}catch(Exception e)
+{
+System.out.println(e);
+}
+}
+public void doPost(HttpServletRequest request,HttpServletResponse response)
+{
+doGet(request,response);
+}
+private void sendBackView(HttpServletResponse response)
+{
+}
+} // class patients view
+
